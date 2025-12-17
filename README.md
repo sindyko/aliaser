@@ -179,26 +179,30 @@ class ShowUser extends Component
 
 **Snapshot comparison:**
 
+#### Without Aliaser (87 chars) + data disclosure
+
 ```json
-// Without Aliaser (87 chars) + data disclosure
 {
     "user": [
         "mdl",
         {
-            ...
+            "...": "..."
         },
         {
             "class": "App\\Models\\User"
         }
     ]
 }
+```
 
-// With Aliaser (42 chars) + data is protected by an alias
+#### With Aliaser (42 chars) + data is protected by an alias
+
+```json
 {
     "user": [
         "mdl-alias",
         {
-            ...
+            "...": "..."
         },
         {
             "class": "user"
@@ -218,9 +222,20 @@ class EditPost extends Component
 
 **Snapshot:**
 
+#### Before:
+
 ```json
-// Before: {"class": "App\\Livewire\\Forms\\PostForm"}
-// After:  {"class": "postForm"}
+{
+    "class": "App\\Livewire\\Forms\\PostForm"
+}
+```
+
+#### After:
+
+```json
+{
+    "class": "postForm"
+}
 ```
 
 #### Collections
@@ -234,13 +249,14 @@ class PostsList extends Component
 
 **Snapshot:**
 
+#### Before
+
 ```json
-// Before
 {
     "posts": [
         "elcln",
         [
-            ...
+            "..."
         ],
         {
             "class": "Illuminate\\Database\\Eloquent\\Collection",
@@ -248,13 +264,16 @@ class PostsList extends Component
         }
     ]
 }
+```
 
-// After (70% smaller!)
+#### After (70% smaller!)
+
+```json
 {
     "posts": [
         "elcln-alias",
         [
-            ...
+            "..."
         ],
         {
             "class": "elqn_clctn",
@@ -280,9 +299,20 @@ class UserProfile extends Component
 
 **Snapshot:**
 
+#### Before
+
 ```json
-// Before: {"class": "App\\Enums\\UserStatus"}
-// After:  {"class": "userStatus"}
+{
+    "class": "App\\Enums\\UserStatus"
+}
+```
+
+#### After:
+
+```json
+{
+    "class": "userStatus"
+}
 ```
 
 #### Objects (DTOs/Value Objects)
@@ -297,48 +327,48 @@ class ProductFilter extends Component
 
 **Snapshot:**
 
+#### Before
+
 ```json
-// Before
 {
     "price": [
         "obj",
         {
-            ...
+            "...": "..."
         },
         {
             "class": "App\\ValueObjects\\Money"
         }
-    ]
-}
-{
+    ],
     "filters": [
         "obj",
         {
-            ...
+            "...": "..."
         },
         {
             "class": "App\\DTOs\\UserFilterDTO"
         }
     ]
 }
+```
 
-// After
+#### After
+
+```json
 {
     "price": [
         "obj-alias",
         {
-            ...
+            "...": "..."
         },
         {
             "class": "money"
         }
-    ]
-}
-{
+    ],
     "filters": [
         "obj-alias",
         {
-            ...
+            "...": "..."
         },
         {
             "class": "userFilter"
@@ -673,13 +703,14 @@ modelsMap(['user' => \App\Domain\Users\User::class]);
 
 ## 🔒 Security Benefits
 
+#### Without Aliaser - exposes internal structure
+
 ```json
-// Without Aliaser - exposes internal structure
 {
     "user": [
         "mdl",
         {
-            ...
+            "...": "..."
         },
         {
             "class": "App\\Domain\\Users\\Models\\User"
@@ -688,20 +719,23 @@ modelsMap(['user' => \App\Domain\Users\User::class]);
     "settings": [
         "obj",
         {
-            ...
+            "...": "..."
         },
         {
             "class": "App\\Settings\\UserSettings"
         }
     ]
 }
+```
 
-// With Aliaser - obfuscated paths
+#### With Aliaser - obfuscated paths
+
+```json
 {
     "user": [
         "mdl-alias",
         {
-            ...
+            "...": "..."
         },
         {
             "class": "user"
@@ -710,7 +744,7 @@ modelsMap(['user' => \App\Domain\Users\User::class]);
     "settings": [
         "obj-alias",
         {
-            ...
+            "...": "..."
         },
         {
             "class": "userSettings"

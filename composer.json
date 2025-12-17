@@ -1,0 +1,84 @@
+{
+    "name": "sindyko/aliaser",
+    "description": "Beautiful alias management for Laravel models, forms, and classes with Livewire support.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "alias",
+        "entity",
+        "livewire",
+        "forms",
+        "dto",
+        "value-objects",
+        "morph-map",
+        "alias livewire"
+    ],
+    "authors": [
+        {
+            "name": "Alexander Kovalchuk",
+            "email": "mail@sindyko.ru"
+        }
+    ],
+    "homepage": "https://github.com/sindyko/aliaser",
+    "support": {
+        "issues": "https://github.com/sindyko/aliaser/issues",
+        "source": "https://github.com/sindyko/aliaser"
+    },
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/console": "^10.0|^11.0|^12.0",
+        "illuminate/contracts": "^10.0|^11.0|^12.0",
+        "illuminate/database": "^10.0|^11.0|^12.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0",
+        "phpunit/phpunit": "^10.0|^11.0",
+        "laravel/pint": "^1.0",
+        "calebporzio/sushi": "^2.5",
+        "livewire/livewire": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sindyko\\Aliaser\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sindyko\\Aliaser\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "format": "vendor/bin/pint"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.1-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Sindyko\\Aliaser\\Providers\\AliaserServiceProvider"
+            ],
+            "aliases": {
+                "Entity": "Sindyko\\Aliaser\\Facades\\Entity"
+            }
+        }
+    },
+    "suggest": {
+        "livewire/livewire": "Required for Livewire Synthesizers support (^3.0|^4.0)"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

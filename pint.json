@@ -1,0 +1,11 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "declare_strict_types": true,
+        "array_indentation": false,
+        "new_with_parentheses": {
+            "anonymous_class": true,
+            "named_class": true
+        }
+    }
+}

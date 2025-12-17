@@ -5,6 +5,7 @@ on:
     branches: [ main, master, develop ]
   pull_request:
     branches: [ main, master ]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -23,8 +24,15 @@ jobs:
             testbench: ^9.0
           - laravel: 12
             testbench: ^10.0
+        exclude:
+          # Laravel 11 requires PHP ^8.2
+          - php: 8.1
+            laravel: 11
+          # Laravel 12 requires PHP ^8.2
+          - php: 8.1
+            laravel: 12
 
-    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 
     steps:
       - name: Checkout code
@@ -56,14 +64,3 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/phpunit
-
-      - name: Execute tests with coverage
-        if: matrix.php == '8.3' && matrix.laravel == '12'
-        run: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.xml
-
-      - name: Upload coverage to Codecov
-        if: matrix.php == '8.3' && matrix.laravel == '12'
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./coverage.xml
-          fail_ci_if_error: false

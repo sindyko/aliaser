@@ -36,7 +36,7 @@ class InstallCommand extends Command
 
         $params = [
             '--provider' => 'Sindyko\Aliaser\Providers\AliaserServiceProvider',
-            '--tag' => 'config',
+            '--tag' => 'aliaser-config',
         ];
 
         if ($this->option('force')) {

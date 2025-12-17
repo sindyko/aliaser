@@ -2,6 +2,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/sindyko/aliaser.svg?style=flat-square)](https://packagist.org/packages/sindyko/aliaser)
 [![GitHub Stars](https://img.shields.io/github/stars/sindyko/aliaser.svg?style=flat-square)](https://github.com/sindyko/aliaser)
 [![License](https://img.shields.io/packagist/l/sindyko/aliaser.svg?style=flat-square)](https://packagist.org/packages/sindyko/aliaser)
+[![Tests](https://github.com/sindyko/aliaser/actions/workflows/tests.yml/badge.svg)](https://github.com/sindyko/aliaser/actions/workflows/tests.yml)
 
 # Aliaser 🎭
 

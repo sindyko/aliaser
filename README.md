@@ -1,3 +1,8 @@
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/sindyko/aliaser.svg?style=flat-square)](https://packagist.org/packages/sindyko/aliaser)
+[![Total Downloads](https://img.shields.io/packagist/dt/sindyko/aliaser.svg?style=flat-square)](https://packagist.org/packages/sindyko/aliaser)
+[![GitHub Stars](https://img.shields.io/github/stars/sindyko/aliaser.svg?style=flat-square)](https://github.com/sindyko/aliaser)
+[![License](https://img.shields.io/packagist/l/sindyko/aliaser.svg?style=flat-square)](https://packagist.org/packages/sindyko/aliaser)
+
 # Aliaser 🎭
 
 Elegant alias management for Laravel Eloquent models, Livewire forms, DTOs, collections, and enums. Replace long class

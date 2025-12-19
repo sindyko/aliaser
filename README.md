@@ -4,6 +4,12 @@
 [![License](https://img.shields.io/packagist/l/sindyko/aliaser.svg?style=flat-square)](https://packagist.org/packages/sindyko/aliaser)
 [![Tests](https://github.com/sindyko/aliaser/actions/workflows/tests.yml/badge.svg)](https://github.com/sindyko/aliaser/actions/workflows/tests.yml)
 
+## Requirements
+
+- PHP ^8.1|^8.2|^8.3
+- Laravel ^10.0|^11.0|^12.0
+- Livewire ^3.0 (optional, for Livewire integration)
+
 # Aliaser 🎭
 
 Elegant alias management for Laravel Eloquent models, Livewire forms, DTOs, collections, and enums. Replace long class
@@ -19,6 +25,24 @@ names with short, memorable aliases throughout your application and Livewire sna
 - 🎨 **Beautiful CLI** - artisan commands with topics
 - 🔒 **Security** - obfuscated class paths in frontend
 - 🧪 **Fully tested** - comprehensive test coverage
+
+## Features
+
+### Core Features (work everywhere)
+
+- 🎯 **Entity Facade** - Access models by alias: `Entity::user(1)` instead of `User::find(1)`
+- 🗺️ **Morph Map Integration** - Automatically sync aliases with Eloquent morph map
+- 📦 **Multiple Registries** - Separate registries for Models, Forms, DTOs, Collections, and Enums
+- 🛠️ **Artisan Commands** - `aliaser:install`, `aliaser:list`, `aliaser:help`
+- 🔧 **Helper Functions** - Convenient `modelsMap()`, `formsMap()`, etc.
+
+### Livewire 3.x Features
+
+- 🚀 **Snapshot Optimization** - Up to 50% smaller Livewire snapshots
+- 🔒 **Hide Internal Structure** - Short aliases instead of full class names in frontend
+- ⚡ **Custom Synthesizers** - Automatic serialization for Models, Collections, Forms, Enums, and DTOs
+
+> **Note**: Livewire features require Livewire 3.x. See [Livewire Compatibility](#livewire-compatibility) for details.
 
 ## 📦 Installation
 
@@ -784,6 +808,58 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 ## 🙏 Credits
 
 - [Alexander Kovalchuk](https://github.com/sindyko)
+
+***
+
+### Livewire Compatibility
+
+**Current Status:**
+
+- ✅ **Livewire 3.x** - Fully supported with all features
+- ⚠️ **Livewire 2.x** - Not currently supported (coming soon)
+- ✅ **No Livewire** - Core features work without Livewire
+
+> **Note**: Livewire 2.x support is planned for a future release. Currently, if you have Livewire 2.x installed,
+> Livewire-specific features (snapshot optimization) will be automatically disabled, but all other features will work
+> normally.
+
+#### What works without Livewire 3?
+
+Even without Livewire 3.x (or without Livewire at all), you can use:
+
+- ✅ **Entity facade**: `Entity::user()->where('active', true)->get()`
+- ✅ **Model morph map integration**: Short aliases in database polymorphic relations
+- ✅ **All registries**: Models, Forms, Objects, Collections, Enums
+- ✅ **Artisan commands**: `aliaser:list`, `aliaser:help`, etc.
+
+Only **Livewire snapshot optimization** requires Livewire 3.x.
+
+#### Upgrading to Livewire 3
+
+If you're using Livewire 2.x and want full Aliaser integration:
+
+***
+
+## FAQ
+
+### Does Aliaser work without Livewire?
+
+Yes! Core features like Entity facade, morph map integration, and registries work perfectly without Livewire. Only
+snapshot optimization requires Livewire 3.x.
+
+### I have Livewire 2.x installed. Will Aliaser work?
+
+Yes, but with limited functionality. Aliaser will automatically detect Livewire 2.x and disable Livewire-specific
+features. The Entity facade, registries, and morph map integration will work normally. Livewire 2.x support is planned
+for future releases.
+
+### Why doesn't Aliaser support Livewire 2.x yet?
+
+Livewire 3 introduced a new synthesizer architecture that Aliaser uses for snapshot optimization. Livewire 2 has a
+different internal structure. We're working on backward compatibility and plan to support Livewire 2.x in an upcoming
+release.
+
+### How do I check which version of Livewire I have?
 
 ***
 

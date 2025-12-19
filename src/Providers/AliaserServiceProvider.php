@@ -29,7 +29,7 @@ class AliaserServiceProvider extends ServiceProvider
         $this->app->alias('entity.manager', EntityManager::class);
         $this->app->alias('entity.registry', ModelRegistry::class);
 
-        if (class_exists(\Livewire\Livewire::class)) {
+        if ($this->isLivewire3Available()) {
             $this->app->register(LivewireSynthServiceProvider::class);
         }
     }
@@ -60,5 +60,26 @@ class AliaserServiceProvider extends ServiceProvider
         if (! empty($map)) {
             Relation::enforceMorphMap($map);
         }
+    }
+
+    protected function isLivewire3Available(): bool
+    {
+        if (! class_exists(\Livewire\Livewire::class)) {
+            return false;
+        }
+
+        if (class_exists(\Composer\InstalledVersions::class)) {
+            try {
+                $version = \Composer\InstalledVersions::getVersion('livewire/livewire');
+
+                if ($version && version_compare($version, '3.0.0', '>=')) {
+                    return true;
+                }
+            } catch (\Exception $e) {
+                // Fallback
+            }
+        }
+
+        return class_exists(\Livewire\Mechanisms\HandleComponents\Synthesizers\Synth::class);
     }
 }

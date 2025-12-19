@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sindyko\Aliaser\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -23,24 +25,38 @@ class LivewireSynthServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        if (! $this->isLivewireAvailable()) {
+        if (! $this->isLivewireV3OrHigher()) {
             return;
         }
 
         $this->registerSynthesizers();
     }
 
-    protected function isLivewireAvailable(): bool
+    protected function isLivewireV3OrHigher(): bool
     {
-        return class_exists(\Livewire\Livewire::class);
+        if (! class_exists(\Livewire\Livewire::class)) {
+            return false;
+        }
+
+        if (class_exists(\Composer\InstalledVersions::class)) {
+            try {
+                $version = \Composer\InstalledVersions::getVersion('livewire/livewire');
+
+                if ($version && version_compare($version, '3.0.0', '>=')) {
+                    return true;
+                }
+            } catch (\Exception $e) {
+                // Fallback
+            }
+        }
+
+        return class_exists(\Livewire\Mechanisms\HandleComponents\Synthesizers\Synth::class);
     }
 
     protected function registerSynthesizers(): void
     {
         foreach ($this->synthesizers as $synthesizer) {
-            if (class_exists($synthesizer)) {
-                \Livewire\Livewire::propertySynthesizer($synthesizer);
-            }
+            \Livewire\Livewire::propertySynthesizer($synthesizer);
         }
     }
 }
